@@ -14,13 +14,13 @@ public class MicroserviciosPracticaPatronesClienteApplication implements Command
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Service service = new Service();
-		
 		String open = "open";
 		String close = "close";
 		String halfOpen = "half-open";
 		CocheBuilder builder = new CocheBuilder();
-		Coche coche = builder.status(open).marca("Seat").nPuertas(5).build();
+		Singleton singleton = Singleton.getInstance(builder.status(open).marca("Seat").nPuertas(5).build());
+		Coche coche = singleton.getCoche();
+		Service service = new Service();
 		
 		
 		for(int i=0; i <= 5 && coche.getStatus().equals(open); i++) {
